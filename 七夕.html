@@ -1,0 +1,138 @@
+七夕告白 - 致李凌薇
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>七夕快乐 · 李凌薇</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            min-height: 100vh;
+            background: linear-gradient(#0b0520, #241040, #401a5c);
+            overflow: hidden;
+            font-family: "Microsoft Yahei", sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+        /* 星星闪烁 */
+        .star {
+            position: absolute;
+ background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% {opacity:0.3;}
+ 100% {opacity:1;}
+        }
+ /* 花瓣飘落 */
+        .petal {
+            position: absolute;
+            width: 14px;
+            height:14px;
+            background:#ff88bb;
+            border-radius: 50% 0 50% 50%;
+            opacity:0.75;
+            animation: fall 8s linear infinite;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(110vh) rotate(720deg);
+            }
+        }
+        .container{
+            z-index:10;
+            text-align:center;
+            padding:20px;
+        }
+        h1{
+ font-size: 2.8rem;
+            color:#ffb8d8;
+            text-shadow: 0 0 12px #ff66aa;
+            margin-bottom:24px;
+        }
+        .heart{
+            font-size: 5rem;
+            color:#ff4477;
+            animation: beat 1.2s infinite;
+            margin:20px 0;
+        }
+        @keyframes beat{
+            0%,100%{transform: scale(1);}
+            50%{transform: scale(1.15);}
+        }
+        .text-desc{
+            font-size:1.2rem;
+            line-height:1.8;
+            color:#f8d8ec;
+            max-width:500px;
+        }
+        .date-text{
+            margin-top:30px;
+            font-size:1rem;
+            color:#ffc2dd;
+        }
+        /* 手机适配 */
+ @media(max-width:600px){
+            h1{font-size:1.8rem;}
+            .heart{font-size:3.5rem;}
+        }
+    </style>
+</head>
+<body>
+    <!-- 星星容器 -->
+    <div id="stars"></div>
+    <!-- 花瓣容器 -->
+    <div id="petals"></div>
+
+    <div class="container">
+        <h1>七夕予你 · 李凌薇</h1>
+        <div class="heart">❤</div>
+        <div class="text-desc">
+            星河迢迢，鹊桥相会<br/>
+            世间万般美好，皆予李凌薇<br/>
+            愿岁岁年年，平安喜乐，朝夕皆甜
+        </div>
+        <div class="date-text">七夕快乐 · 专属温柔 ✨</div>
+    </div>
+
+<script>
+// 生成星星
+const starBox = document.getElementById('stars');
+for(let i=0;i<120;i++){
+    const star = document.createElement('div');
+    star.classList.add('star');
+    const size = Math.random()*3+1;
+    star.style.width = size+'px';
+    star.style.height = size+'px';
+    star.style.left = Math.random()*100+'%';
+    star.style.top = Math.random()*100+'%';
+    star.style.animationDelay = Math.random()*2+'s';
+    starBox.appendChild(star);
+}
+
+// 生成飘落花瓣
+const petalBox = document.getElementById('petals');
+function createPetal(){
+    const p = document.createElement('div');
+ p.classList.add('petal');
+    p.style.left = Math.random()*100+'%';
+    p.style.animationDuration = (Math.random()*4+6)+'s';
+    petalBox.appendChild(p);
+    setTimeout(()=>{p.remove();},10000);
+}
+setInterval(createPetal,400);
+</script>
+</body>
+</html>

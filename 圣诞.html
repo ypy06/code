@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圣诞快乐 | </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0a0a2a;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        .container {
+            position: relative;
+            text-align: center;
+            width: 100%;
+            height: 100vh;
+        }
+        /* 圣诞树 */
+        .tree {
+            position: relative;
+            margin: 50px auto 20px;
+        }
+        /* 树冠 */
+        .level {
+            position: absolute;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 80px solid #0a6;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .level1 { top: 140px; border-bottom-color: #2a8; }
+        .level2 { top: 100px; width: 0; border-left: 60px solid transparent; border-right: 60px solid transparent; border-bottom: 90px solid #1a7; }
+        .level3 { top: 60px; width: 0; border-left: 70px solid transparent; border-right: 70px solid transparent; border-bottom: 100px solid #096; }
+        .level4 { top: 20px; width: 0; border-left: 80px solid transparent; border-right: 80px solid transparent; border-bottom: 110px solid #0a6; }
+        /* 树干 */
+        .trunk {
+            position: absolute;
+            width: 30px;
+            height: 60px;
+            background: #8B4513;
+            top: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+        }
+        /* 装饰小球 */
+        .ball {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            z-index: 10;
+        }
+        .ball1 { background: #ff4d4d; top: 160px; left: calc(50% - 10px); }
+        .ball2 { background: #ffeb3b; top: 120px; left: calc(50% - 40px); }
+        .ball3 { background: #3bffd9; top: 120px; left: calc(50% + 20px); }
+        .ball4 { background: #ff80ab; top: 80px; left: calc(50% - 60px); }
+        .ball5 { background: #9c27b0; top: 80px; left: calc(50% + 40px); }
+        .ball6 { background: #4caf50; top: 40px; left: calc(50% - 20px); }
+        /* 树顶星星 */
+        .star {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: gold;
+            font-size: 40px;
+            text-shadow: 0 0 10px #ff0;
+            z-index: 20;
+        }
+        /* 文字 */
+        .message {
+            color: #ffeb3b;
+            font-size: 28px;
+            margin-top: 320px;
+            text-shadow: 0 0 10px #ff4d4d, 0 0 20px #ff4d4d;
+            animation: blink 2s infinite;
+            padding: 0 20px;
+            font-weight: bold;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        /* 雪花 */
+        .snowflake {
+            position: absolute;
+            color: white;
+            font-size: 20px;
+            top: -20px;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh); }
+        }
+        /* 底部按钮 */
+        .btn {
+            margin-top: 30px;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #ff4d4d, #ffeb3b);
+            border: none;
+            border-radius: 30px;
+            color: #0a0a2a;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 77, 77, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tree">
+            <div class="level level1"></div>
+            <div class="level level2"></div>
+            <div class="level level3"></div>
+            <div class="level level4"></div>
+            <div class="trunk"></div>
+            <div class="ball ball1"></div>
+            <div class="ball ball2"></div>
+            <div class="ball ball3"></div>
+            <div class="ball ball4"></div>
+            <div class="ball ball5"></div>
+            <div class="ball ball6"></div>
+            <div class="star">★</div>
+        </div>
+        <div class="message">圣诞快乐！</div>
+        <button class="btn" onclick="addSnow()">❄️ 飘雪效果</button>
+    </div>
+
+    <script>
+        // 创建雪花
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowflake.style.opacity = Math.random() * 0.5 + 0.5;
+            snowflake.style.fontSize = Math.random() * 10 + 15 + 'px';
+            document.body.appendChild(snowflake);
+            setTimeout(() => {
+                snowflake.remove();
+            }, 5000);
+        }
+
+        // 触发飘雪
+        function addSnow() {
+            for (let i = 0; i < 50; i++) {
+                setTimeout(createSnowflake, i * 100);
+            }
+            // 按钮反馈
+            const btn = document.querySelector('.btn');
+            btn.textContent = '❄️ 雪花飘落中...';
+            setTimeout(() => {
+                btn.textContent = '❄️ 飘雪效果';
+            }, 2000);
+        }
+
+        // 小球闪烁效果
+        setInterval(() => {
+            document.querySelectorAll('.ball').forEach(ball => {
+                ball.style.transform = `scale(${Math.random() * 0.5 + 0.8})`;
+            });
+        }, 500);
+
+        // 自动飘雪
+        setInterval(createSnowflake, 300);
+    </script>
+</body>
+</html>效果图
